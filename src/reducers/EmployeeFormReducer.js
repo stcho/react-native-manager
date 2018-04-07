@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 	shift: ''
 };
 
-export default (state=INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case EMPLOYEE_UDDATE:
 			return { ...state, [action.payload.prop]: action.payload.value };
