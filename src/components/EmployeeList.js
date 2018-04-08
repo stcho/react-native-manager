@@ -1,23 +1,26 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import { employeesGet } from '../actions';
+import EmployeeListItem from './EmployeeListItem';
 
 class EmployeeList extends Component {
 	componentWillMount() {
 		this.props.employeesGet();
 	}
 
+	renderItem({ item }) {
+    return <EmployeeListItem employee={item} />;
+  }
+
 	render() {
-		console.log(this.props);
-		
 		return (
-			<View>
-				<Text>Employee List</Text>
-				<Text>Employee List</Text>
-				<Text>Employee List</Text>
-			</View>
+			<FlatList
+        data={this.props.employees}
+        renderItem={this.renderItem}
+        keyExtractor={(item) => item.id}
+			/>
 		);
 	}
 }
@@ -26,6 +29,8 @@ const mapStateToProps = state => {
 	const employees = _.map(state.employees, (val, uid) => {
 		return { ...val, uid };
 	});
+
+	console.log(employees);
 
 	return { employees };
 };
