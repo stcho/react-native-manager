@@ -19,7 +19,7 @@ class EmployeeList extends Component {
 			<FlatList
         data={this.props.employees}
         renderItem={this.renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.uid}
 			/>
 		);
 	}
@@ -29,8 +29,6 @@ const mapStateToProps = state => {
 	const employees = _.map(state.employees, (val, uid) => {
 		return { ...val, uid };
 	});
-
-	console.log(employees);
 
 	return { employees };
 };
